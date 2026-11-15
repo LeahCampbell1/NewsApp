@@ -1,0 +1,157 @@
+{% extends 'base.html' %}
+
+{% block title %}Create Newsletter | GoodToKnow{% endblock %}
+
+{% block content %}
+
+<div class="container mt-4">
+
+    <div class="newsletter-detail-box">
+
+        <h1 class="mb-3">
+            {% if form.instance.pk %}
+            Edit Newsletter
+            {% else %}
+            Create Newsletter
+            {% endif %}
+        </h1>
+
+        <p class="text-muted mb-4">
+            Create a newsletter by entering a title, description
+            and selecting the articles you want to include.
+        </p>
+
+        <hr>
+
+        <form method="POST">
+
+            {% csrf_token %}
+
+            {% if form.non_field_errors %}
+            <div class="alert alert-danger">
+                {{ form.non_field_errors }}
+            </div>
+            {% endif %}
+
+            <!-- NEWSLETTER TITLE -->
+            <div class="mb-4">
+
+                <label for="{{ form.title.id_for_label }}" class="form-label">
+                    <strong>{{ form.title.label|default:"Newsletter Title" }}</strong>
+                </label>
+
+                {{ form.title }}
+
+                {% for error in form.title.errors %}
+                <div class="text-danger small mt-1">
+                    {{ error }}
+                </div>
+                {% endfor %}
+
+            </div>
+
+            <!-- PUBLISHER SELECTION -->
+            <div class="mb-4">
+
+                <label for="{{ form.publisher.id_for_label }}" class="form-label">
+                    <strong>{{ form.publisher.label }}</strong>
+                </label>
+
+                {{ form.publisher }}
+
+                <div class="form-text">
+                    Select the publisher this newsletter is being
+                    created for, or leave blank to publish independently.
+                </div>
+
+                {% for error in form.publisher.errors %}
+                <div class="text-danger small mt-1">
+                    {{ error }}
+                </div>
+                {% endfor %}
+
+            </div>
+
+            <!-- NEWSLETTER DESCRIPTION -->
+            <div class="mb-4">
+
+                <label for="{{ form.description.id_for_label }}" class="form-label">
+                    <strong>{{ form.description.label|default:"Newsletter Description" }}</strong>
+                </label>
+
+                {{ form.description }}
+
+                {% for error in form.description.errors %}
+                <div class="text-danger small mt-1">
+                    {{ error }}
+                </div>
+                {% endfor %}
+
+            </div>
+
+            <hr>
+
+            <!-- ARTICLE SELECTION -->
+            <div class="mb-4">
+
+                <h2 class="mb-3">Select Articles</h2>
+
+                <p class="text-muted small">
+                    Select the articles you would like to include
+                    in your newsletter. You can select multiple articles.
+                </p>
+
+                {% for article in form.articles %}
+
+                <div class="form-check mb-2">
+
+                    {{ article.tag }}
+
+                    <label class="form-check-label" for="{{ article.id_for_label }}">
+                        {{ article.choice_label }}
+                    </label>
+
+                </div>
+
+                {% empty %}
+
+                <p class="text-muted">
+                    No articles are currently available.
+                </p>
+
+                {% endfor %}
+
+                {% for error in form.articles.errors %}
+                <div class="text-danger small mt-1">
+                    {{ error }}
+                </div>
+                {% endfor %}
+
+            </div>
+
+            <hr>
+
+            <!-- FORM BUTTONS -->
+            <div class="mt-4">
+
+                <button type="submit" class="btn btn-dark">
+                    {% if form.instance.pk %}
+                    Update Newsletter
+                    {% else %}
+                    Create Newsletter
+                    {% endif %}
+                </button>
+
+                <a href="{% url 'browse_newsletters' %}" class="btn btn-outline-dark ms-2">
+                    Cancel
+                </a>
+
+            </div>
+
+        </form>
+
+    </div>
+
+</div>
+
+{% endblock %}

@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+
+{% block title %}Browse Newsletters | GoodToKnow{% endblock %}
+
+{% block content %}
+
+<div class="container mt-4">
+
+    <h1 class="text-center mb-4">Browse Newsletters</h1>
+
+    <div class="row">
+
+        {% for newsletter in newsletters %}
+
+        <div class="col-md-4 mb-4">
+            <div class="card shadow-sm h-100">
+                <div class="card-body">
+
+                    <h3 class="card-title">
+                        {{ newsletter.title }}
+                    </h3>
+
+                    <p class="card-text">
+                        {{ newsletter.description|truncatewords:30 }}
+                    </p>
+
+                    <p class="text-muted small">
+                        By {{ newsletter.author }}
+                    </p>
+
+                    <a href="{% url 'newsletter_detail' newsletter.id %}" class="btn btn-outline-dark btn-sm">
+                        View Newsletter
+                    </a>
+
+                </div>
+            </div>
+        </div>
+
+        {% empty %}
+
+        <div class="col-12 text-center">
+            <p>No newsletters available yet.</p>
+        </div>
+
+        {% endfor %}
+
+    </div>
+
+</div>
+
+{% endblock %}

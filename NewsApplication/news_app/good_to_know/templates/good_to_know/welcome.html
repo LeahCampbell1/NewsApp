@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+{% block title %}Good To Know{% endblock %}
+{% block content %}
+
+<div class="container mx-auto text-center">
+
+    <h3>Login</h3>
+
+    <a href="{% url 'login' %}" class="login-button">
+        Login
+    </a>
+    <h3>Readers</h3>
+    <a href="{% url 'register_reader' %}" class="login-button">
+        Register Reader
+    </a>
+    <div class="divider"></div>
+    <h3>Journalists</h3>
+
+    <p>Journalists register here</p>
+
+    <a href="{% url 'register_journalist' %}" class="login-button vendor-button">
+        Register Journalist
+    </a>
+
+    <h3>Editors</h3>
+
+    <p>Editors register here</p>
+
+    <a href="{% url 'register_editor' %}" class="login-button vendor-button">
+        Register Editor
+    </a>
+</div>
+
+{% endblock %}

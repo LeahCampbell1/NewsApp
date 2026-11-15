@@ -1,0 +1,82 @@
+{% extends 'base.html' %}
+
+{% block title %}Login | Good To Know{% endblock %}
+
+{% block content %}
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-5">
+
+            <div class="card shadow-sm">
+                <div class="card-body p-4">
+
+                    <h2 class="text-center mb-4">
+                        Login
+                    </h2>
+
+                    {% if form.errors %}
+                    <div class="alert alert-danger">
+                        Your username or password is incorrect.
+                        Please try again.
+                    </div>
+                    {% endif %}
+
+                    <form method="post">
+                        {% csrf_token %}
+
+                        <div class="mb-3">
+                            <label for="id_username" class="form-label">
+                                Username
+                            </label>
+
+                            {{ form.username }}
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="id_password" class="form-label">
+                                Password
+                            </label>
+
+                            {{ form.password }}
+                        </div>
+
+                        <!--input type="hidden" name="next" value="{{ next }}"-->
+
+                        <button type="submit" class="btn btn-dark w-100">
+                            Login
+                        </button>
+
+                    </form>
+
+                    <hr>
+
+                    <p class="text-center">
+                        Don't have an account?
+                    </p>
+
+                    <div class="text-center">
+                        <a href="{% url 'register_reader' %}">
+                            Register as a Reader
+                        </a>
+                    </div>
+
+                    <div class="text-center mt-2">
+                        <a href="{% url 'register_journalist' %}">
+                            Register as a Journalist
+                        </a>
+                    </div>
+
+                    <div class="text-center mt-2">
+                        <a href="{% url 'register_editor' %}">
+                            Register as an Editor
+                        </a>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+{% endblock %}

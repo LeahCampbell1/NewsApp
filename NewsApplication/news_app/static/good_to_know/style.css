@@ -1,0 +1,307 @@
+/* =====================================
+   GENERAL WEBSITE STYLING
+===================================== */
+
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f5f5f5;
+}
+
+/* =====================================
+   HEADER / GOODTOKNOW BANNER
+===================================== */
+
+header {
+    background-color: sienna;
+    color: white;
+    padding: 20px;
+    text-align: center;
+}
+
+header h1 {
+    color: white;
+    margin: 0;
+    font-size: 32px;
+    font-weight: bold;
+}
+
+/* =====================================
+   MAIN CONTENT
+===================================== */
+
+main {
+    padding: 20px;
+    min-height: 400px;
+}
+
+/* =====================================
+   FOOTER
+===================================== */
+
+footer {
+    background-color: #333;
+    color: white;
+    text-align: center;
+    padding: 12px;
+    margin-top: 30px;
+}
+
+footer p {
+    margin: 0;
+}
+
+/* =====================================
+   HEADINGS
+===================================== */
+
+h1,
+h2,
+h3 {
+    color: rgb(51, 5, 51);
+}
+
+/* =====================================
+   HOME PAGE
+===================================== */
+
+.news-container {
+    max-width: 1200px;
+    width: 100%;
+    margin: 30px auto;
+    padding: 20px;
+}
+
+.news-container h1 {
+    margin-bottom: 25px;
+}
+
+.news-container h2 {
+    margin-bottom: 20px;
+}
+
+.news-container {
+    width: 100%;
+    max-width: 1400px;
+    margin: 30px auto;
+    padding: 20px;
+}
+
+/* Ensure the home page grid displays horizontally */
+.news-container .row {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-start;
+}
+
+/* Articles and newsletters columns */
+.news-container .row>div {
+    min-width: 0;
+}
+
+/* =====================================
+   LATEST NEWS MAIN BOX
+===================================== */
+
+.latest-news-box {
+    background-color: white;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    margin-bottom: 30px;
+}
+
+/* =====================================
+   ARTICLES AND NEWSLETTERS BOXES
+===================================== */
+
+.news-section-box {
+    background-color: #f9f9f9;
+    padding: 20px;
+    border-radius: 10px;
+    border: 1px solid #e5e5e5;
+    height: 100%;
+}
+
+/* Section headings */
+.news-section-box h2 {
+    border-bottom: 2px solid sienna;
+    padding-bottom: 12px;
+    color: rgb(51, 5, 51);
+}
+
+/* Individual article and newsletter cards */
+.news-section-box .card {
+    background-color: white;
+    border: 1px solid #eeeeee;
+    border-radius: 8px;
+}
+
+/* =====================================
+   LOGIN AND REGISTRATION
+===================================== */
+
+.card {
+    border-radius: 10px;
+    background-color: white;
+}
+
+.login-button {
+    display: inline-block;
+    background-color: sienna;
+    color: white;
+    padding: 12px 30px;
+    text-decoration: none;
+    border-radius: 5px;
+    margin: 10px;
+}
+
+.login-button:hover {
+    background-color: #75402a;
+}
+
+/* =====================================
+   LINKS
+===================================== */
+
+a {
+    color: rgb(51, 5, 51);
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+a:hover {
+    color: rgb(51, 5, 51);
+    text-decoration: underline;
+}
+
+a:visited {
+    color: rgb(51, 5, 51);
+}
+
+a:active {
+    color: #4e1005;
+}
+
+/* =====================================
+   FORMS
+===================================== */
+
+form {
+    margin-bottom: 25px;
+}
+
+button {
+    padding: 10px 15px;
+    cursor: pointer;
+}
+
+/* =====================================
+   ERROR MESSAGES
+===================================== */
+
+.error-message {
+    color: #b00020;
+    background-color: #fce8e8;
+    padding: 12px;
+    margin-top: 15px;
+    border-radius: 5px;
+}
+
+.main-navigation {
+    background-color: #333;
+    padding: 14px 20px;
+    width: 100%;
+}
+
+.navigation-links {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 50px;
+    flex-wrap: wrap;
+}
+
+.navigation-links a {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 16px;
+    transition: color 0.3s ease;
+}
+
+.navigation-links a:hover {
+    color: #d2a58b;
+    text-decoration: none;
+}
+
+/* Mobile navigation */
+
+@media (max-width: 576px) {
+    .navigation-links {
+        gap: 15px;
+        flex-direction: column;
+    }
+}
+
+.site-header {
+    position: relative;
+}
+
+.logout-button {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+
+    background: transparent;
+    color: white;
+    border: 1px solid white;
+    padding: 7px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.logout-button:hover {
+    background: white;
+    color: sienna;
+}
+
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: bold;
+    color: rgb(51, 5, 51);
+}
+
+.form-control,
+.form-select {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+    font-size: 14px;
+}
+
+.form-group small {
+    display: block;
+    margin-top: 6px;
+    color: #666;
+}
+
+.error-message {
+    color: #b00020;
+    margin-top: 5px;
+}
+
+textarea.form-control {
+    resize: vertical;
+}

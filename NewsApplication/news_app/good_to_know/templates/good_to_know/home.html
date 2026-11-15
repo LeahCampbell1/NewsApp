@@ -1,0 +1,117 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="news-container mt-4">
+
+    <!-- LATEST NEWS MAIN BOX -->
+    <div class="latest-news-box">
+
+        <h1 class="text-center mb-4">Latest News</h1>
+
+        <div class="row">
+
+            <!-- ARTICLES BOX -->
+            <div class="col-12 col-md-7">
+
+                <div class="news-section-box">
+
+                    <h2 class="mb-3">Articles</h2>
+
+                    {% for article in articles %}
+
+                    <div class="card mb-3 shadow-sm">
+                        <div class="card-body">
+
+                            <h3 class="card-title">
+                                <a href="{% url 'article_detail' article.id %}" class="text-decoration-none text-dark">
+                                    {{ article.title }}
+                                </a>
+                            </h3>
+
+                            <p class="text-muted mb-2">
+                                By {{ article.author }}
+                            </p>
+
+                            {% if article.publisher %}
+                            <span class="badge bg-secondary mb-2">
+                                {{ article.publisher.name }}
+                            </span>
+                            {% else %}
+                            <span class="badge bg-dark mb-2">
+                                Independent journalist
+                            </span>
+                            {% endif %}
+
+                            <p class="card-text">
+                                {{ article.content|truncatewords:30 }}
+                            </p>
+
+                            <a href="{% url 'article_detail' article.id %}" class="btn btn-outline-dark btn-sm">
+                                Read Article
+                            </a>
+
+                        </div>
+                    </div>
+
+                    {% empty %}
+
+                    <p class="text-muted">No articles available yet.</p>
+
+                    {% endfor %}
+
+                </div>
+
+            </div>
+
+            <!-- NEWSLETTERS BOX -->
+            <div class="col-12 col-md-5">
+
+                <div class="news-section-box">
+
+                    <h2 class="mb-3">Newsletters</h2>
+
+                    {% for newsletter in newsletters %}
+
+                    <div class="card mb-3 shadow-sm">
+                        <div class="card-body">
+
+                            <h3 class="card-title">
+                                <a href="{% url 'newsletter_detail' newsletter.id %}"
+                                    class="text-decoration-none text-dark">
+                                    {{ newsletter.title }}
+                                </a>
+                            </h3>
+
+                            <p class="card-text">
+                                {{ newsletter.description|truncatewords:35 }}
+                            </p>
+
+                            <p class="text-muted small">
+                                By {{ newsletter.author }}
+                            </p>
+
+                            <a href="{% url 'newsletter_detail' newsletter.id %}" class="btn btn-outline-dark btn-sm">
+                                View Newsletter
+                            </a>
+
+                        </div>
+                    </div>
+
+                    {% empty %}
+
+                    <p class="text-muted">No newsletters available yet.</p>
+
+                    {% endfor %}
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

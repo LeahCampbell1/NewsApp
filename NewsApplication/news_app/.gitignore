@@ -1,0 +1,71 @@
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.pyd
+
+# Django
+*.log
+local_settings.py
+db.sqlite3
+db.sqlite3-journal
+
+# Uploaded media
+media/
+
+# Environment variables and secrets
+.env
+.env.*
+!.env.example
+
+# Virtual environments
+venv/
+env/
+.venv/
+ENV/
+
+# Testing and coverage
+.coverage
+.coverage.*
+htmlcov/
+.pytest_cache/
+.tox/
+.nox/
+test-results/
+coverage.xml
+
+# Python tooling
+.mypy_cache/
+.dmypy.json
+.pytype/
+.ruff_cache/
+
+# IDE and editor files
+.vscode/
+.idea/
+*.sublime-workspace
+*.sublime-project
+*.swp
+*.swo
+
+# Operating system files
+.DS_Store
+Thumbs.db
+desktop.ini
+$RECYCLE.BIN/
+
+# Build and distribution
+build/
+dist/
+*.egg-info/
+.eggs/
+
+# Temporary files
+*.tmp
+*.bak
+*.orig
+*.rej
+
+# Jupyter
+.ipynb_checkpoints/

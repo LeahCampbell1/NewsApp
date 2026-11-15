@@ -1,0 +1,77 @@
+{% extends 'base.html' %}
+
+{% block title %}Browse Journalists | GoodToKnow{% endblock %}
+
+{% block content %}
+
+<div class="container mt-4">
+
+    <h1 class="text-center mb-4">Browse Journalists</h1>
+
+    <div class="row">
+
+        {% for journalist in journalists %}
+
+        <div class="col-md-4 mb-4">
+            <div class="card shadow-sm h-100">
+                <div class="card-body">
+
+                    <a href="{% url 'journalist_collection' journalist.id %}" class="text-decoration-none">
+
+                        <h3 class="card-title">
+                            {% if journalist.get_full_name %}
+                            {{ journalist.get_full_name }}
+                            {% else %}
+                            {{ journalist.username }}
+                            {% endif %}
+                        </h3>
+
+                    </a>
+                    {% if user.is_authenticated and user.role == 'READER' %}
+                    {% if journalist.id in subscribed_ids %}
+
+                    <span class="badge bg-success mb-2">
+                        Subscribed
+                    </span>
+
+                    <form method="POST" action="{% url 'unsubscribe_journalist' journalist.id %}">
+                        {% csrf_token %}
+
+                        <button type="submit" class="btn btn-outline-danger btn-sm">
+                            Unsubscribe
+                        </button>
+                    </form>
+
+                    {% else %}
+
+                    <form method="POST" action="{% url 'subscribe_journalist' journalist.id %}">
+                        {% csrf_token %}
+
+                        <button type="submit" class="btn btn-dark btn-sm">
+                            Subscribe
+                        </button>
+                    </form>
+
+                    {% endif %}
+                    {% endif %}
+                    <p class="text-muted">
+                        Journalist
+                    </p>
+
+                </div>
+            </div>
+        </div>
+
+        {% empty %}
+
+        <div class="col-12 text-center">
+            <p>No journalists available yet.</p>
+        </div>
+
+        {% endfor %}
+
+    </div>
+
+</div>
+
+{% endblock %}

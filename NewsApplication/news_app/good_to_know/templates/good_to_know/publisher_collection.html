@@ -1,0 +1,122 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ publisher.name }} | Collection{% endblock %}
+
+{% block content %}
+
+<div class="container mt-4">
+
+    <h1>{{ publisher.name }}</h1>
+
+    <p>{{ publisher.description }}</p>
+
+    <hr>
+
+    <div class="row">
+
+        <!-- ARTICLES COLUMN -->
+        <div class="col-md-6 mb-4">
+
+            <h2 class="mb-4">Articles</h2>
+
+            {% for article in articles %}
+
+            <div class="card shadow-sm mb-3">
+                <div class="card-body">
+
+                    <h3 class="card-title">
+                        <a href="{% url 'article_detail' article_id=article.id %}">
+                            {{ article.title }}
+                        </a>
+                    </h3>
+
+                    <p class="text-muted">
+                        By {{ article.author.username }}
+                    </p>
+
+                    <p>
+                        {{ article.content|truncatewords:30 }}
+                    </p>
+
+                </div>
+            </div>
+
+            {% empty %}
+
+            <p>No published articles yet.</p>
+
+            {% endfor %}
+
+        </div>
+
+        <!-- NEWSLETTERS COLUMN -->
+        <div class="col-md-6 mb-4">
+
+            <h2 class="mb-4">Newsletters</h2>
+
+            {% for newsletter in newsletters %}
+
+            <div class="card shadow-sm mb-3">
+                <div class="card-body">
+
+                    <h3 class="card-title">
+                        <a href="{% url 'newsletter_detail' newsletter_id=newsletter.id %}">
+                            {{ newsletter.title }}
+                        </a>
+                    </h3>
+
+                    <p class="text-muted">
+                        By {{ newsletter.author.username }}
+                    </p>
+
+                    <p>
+                        {{ newsletter.description|truncatewords:30 }}
+                    </p>
+
+                </div>
+            </div>
+
+            {% empty %}
+
+            <p>No published newsletters yet.</p>
+
+            {% endfor %}
+
+        </div>
+
+    </div>
+
+    <hr>
+
+    <!-- JOURNALISTS SECTION -->
+    <h2 class="mb-3">Our Journalists</h2>
+
+    <div class="row">
+
+        {% for journalist in journalists %}
+
+        <div class="col-md-4 mb-3">
+
+            <div class="card shadow-sm h-100">
+                <div class="card-body">
+
+                    <a href="{% url 'journalist_collection' journalist.id %}">
+                        {{ journalist.username }}
+                    </a>
+
+                </div>
+            </div>
+
+        </div>
+
+        {% empty %}
+
+        <p>No affiliated journalists yet.</p>
+
+        {% endfor %}
+
+    </div>
+
+</div>
+
+{% endblock %}

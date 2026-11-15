@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ article.title }} | GoodToKnow{% endblock %}
+
+{% block content %}
+
+<div class="container mt-4">
+
+    <div class="article-detail-box">
+
+        <!-- ARTICLE TITLE -->
+        <h1 class="mb-3">{{ article.title }}</h1>
+
+        <!-- ARTICLE INFORMATION -->
+        <div class="article-meta mb-4">
+
+            <p class="text-muted mb-2">
+                By <strong>{{ article.author }}</strong>
+            </p>
+
+            {% if article.publisher %}
+            <p class="mb-2">
+                Publisher:
+                <strong>{{ article.publisher.name }}</strong>
+            </p>
+            {% else %}
+            <p class="mb-2">
+                <span class="badge bg-secondary">
+                    Independent journalist
+                </span>
+            </p>
+            {% endif %}
+
+            <p class="text-muted small">
+                Published: {{ article.created_at|date:"d F Y" }}
+            </p>
+
+        </div>
+
+        <hr>
+
+        <!-- ARTICLE CONTENT -->
+        <div class="article-content">
+
+            {{ article.content|linebreaks }}
+
+        </div>
+
+        <hr>
+
+        <!-- BACK BUTTON -->
+        <a href="{% url 'home' %}" class="btn btn-outline-dark">
+            Back to Latest News
+        </a>
+
+    </div>
+
+</div>
+
+{% endblock %}
