@@ -1,0 +1,114 @@
+{% extends 'base.html' %}
+
+{% block title %}Reader Dashboard | GoodToKnow{% endblock %}
+
+{% block content %}
+
+<div class="container mt-4">
+
+    <h1 class="text-center mb-4">Reader Dashboard</h1>
+
+    <p class="text-center text-muted mb-4">
+        Welcome, {{ user.username }}.
+        Manage and view your subscriptions below.
+    </p>
+
+    <div class="row">
+
+        <!-- SUBSCRIBED PUBLISHERS -->
+
+        <div class="col-md-6">
+
+            <div class="card shadow-sm mb-4 h-100">
+
+                <div class="card-body">
+
+                    <h2 class="mb-3">My Publishers</h2>
+
+                    {% for publisher in publishers %}
+
+                    <div class="border-bottom py-3">
+
+                        <h5>{{ publisher.name }}</h5>
+
+                    </div>
+                    <a href="{% url 'publisher_collection' publisher.id %}" class="text-decoration-none">
+                        View Publisher collection
+                    </a>
+                    <form method="POST" action="{% url 'unsubscribe_publisher' publisher.id %}">
+                        {% csrf_token %}
+
+                        <button type="submit" class="btn btn-outline-danger btn-sm">
+                            Unsubscribe
+                        </button>
+                    </form>
+                    {% empty %}
+
+                    <p class="text-muted">
+                        You haven't subscribed to any publishers yet.
+                    </p>
+
+                    {% endfor %}
+
+                    <a href="{% url 'browse_publishers' %}" class="btn btn-outline-dark btn-sm mt-3">
+                        Browse Publishers
+                    </a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- SUBSCRIBED Journalists -->
+
+        <div class="col-md-6">
+
+            <div class="card shadow-sm mb-4 h-100">
+
+                <div class="card-body">
+
+                    <h2 class="mb-3">My Journalists</h2>
+
+                    {% for journalist in journalists %}
+
+                    <div class="border-bottom py-3">
+
+                        <h5>{{ journalist.username }}</h5>
+
+                        <a href="{% url 'journalist_collection' journalist.id %}" class="text-decoration-none">
+                            View Journalist collection
+                        </a>
+
+                    </div>
+                    <form method="POST" action="{% url 'unsubscribe_journalist' journalist.id %}">
+                        {% csrf_token %}
+
+                        <button type="submit" class="btn btn-outline-danger btn-sm">
+                            Unsubscribe
+                        </button>
+                    </form>
+                    {% empty %}
+
+                    <p class="text-muted">
+                        You haven't subscribed to any journalists yet.
+                    </p>
+
+                    {% endfor %}
+
+                    <a href="{% url 'browse_journalists' %}" class="btn btn-outline-dark btn-sm mt-3">
+                        Browse Journalists
+                    </a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

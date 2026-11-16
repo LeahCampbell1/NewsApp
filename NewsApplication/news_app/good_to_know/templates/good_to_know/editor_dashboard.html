@@ -1,0 +1,238 @@
+{% extends 'base.html' %}
+
+{% block title %}Editor Dashboard | GoodToKnow{% endblock %}
+
+{% block content %}
+
+<div class="container mt-4">
+
+    <h1 class="mb-2">Editor Dashboard</h1>
+    <h2 class="text-muted mb-3">Your Publishers</h2>
+
+    <div class="mb-3">
+        {% for publisher in publishers %}
+
+        <a href="{% url 'publisher_collection' publisher.id %}" class="btn btn-outline-dark btn-sm me-2 mb-2">
+            {{ publisher.name }}
+        </a>
+
+        {% empty %}
+
+        <p class="text-muted">
+            You are not currently assigned to any publishers.
+        </p>
+
+        {% endfor %}
+    </div>
+
+    <a href="{% url 'create_publisher' %}" class="btn btn-primary">
+        Create Publisher
+    </a>
+    <hr>
+
+    <!-- ARTICLES AWAITING APPROVAL -->
+
+    <h2 class="mb-3">Articles Awaiting Approval</h2>
+
+    {% for article in pending_articles %}
+
+    <div class="card shadow-sm mb-3">
+        <div class="card-body">
+
+            <h3 class="card-title">
+                <a href="{% url 'article_detail' article_id=article.id %}">
+                    {{ article.title }}
+                </a>
+            </h3>
+
+            <p class="text-muted">
+                Author: {{ article.author }}
+            </p>
+
+            <span class="badge bg-warning text-dark mb-3">
+                Awaiting Approval
+            </span>
+
+            <div class="mt-2">
+
+                <a href="{% url 'editor_edit_article' article.id %}" class="btn btn-outline-dark btn-sm">
+                    Edit
+                </a>
+
+                <form method="POST" action="{% url 'editor_delete_article' article.id %}" class="d-inline">
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-outline-danger btn-sm">
+                        Delete
+                    </button>
+                </form>
+
+                <form method="POST" action="{% url 'approve_article' article.id %}" class="d-inline">
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-dark btn-sm">
+                        Approve Article
+                    </button>
+                </form>
+
+            </div>
+
+        </div>
+    </div>
+
+    {% empty %}
+
+    <p class="text-muted">No articles awaiting approval.</p>
+
+    {% endfor %}
+
+
+    <hr>
+
+    <!-- APPROVED ARTICLES -->
+
+    <h2 class="mb-3">Approved Articles</h2>
+
+    {% for article in approved_articles %}
+
+    <div class="card shadow-sm mb-3">
+        <div class="card-body">
+
+            <h3 class="card-title">
+                <a href="{% url 'article_detail' article_id=article.id %}">
+                    {{ article.title }}
+                </a>
+            </h3>
+
+            <p class="text-muted">
+                Author: {{ article.author }}
+            </p>
+
+            <span class="badge bg-success mb-3">
+                Approved
+            </span>
+
+            <div class="mt-2">
+
+                <form method="POST" action="{% url 'editor_delete_article' article.id %}" class="d-inline">
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-outline-danger btn-sm">
+                        Delete
+                    </button>
+                </form>
+
+            </div>
+
+        </div>
+    </div>
+
+    {% empty %}
+
+    <p class="text-muted">No approved articles yet.</p>
+
+    {% endfor %}
+
+
+    <hr>
+
+    <!-- NEWSLETTERS AWAITING APPROVAL -->
+
+    <h2 class="mb-3">Newsletters Awaiting Approval</h2>
+
+    {% for newsletter in pending_newsletters %}
+
+    <div class="card shadow-sm mb-3">
+        <div class="card-body">
+
+            <h3 class="card-title">
+                <a href="{% url 'newsletter_detail' newsletter_id=newsletter.id %}">
+                    {{ newsletter.title }}
+                </a>
+            </h3>
+
+            <p class="text-muted">
+                Author: {{ newsletter.author }}
+            </p>
+
+            <span class="badge bg-warning text-dark mb-3">
+                Awaiting Approval
+            </span>
+
+            <div class="mt-2">
+
+                <a href="{% url 'editor_edit_newsletter' newsletter.id %}" class="btn btn-outline-dark btn-sm">
+                    Edit
+                </a>
+
+                <form method="POST" action="{% url 'editor_delete_newsletter' newsletter.id %}" class="d-inline">
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-outline-danger btn-sm">
+                        Delete
+                    </button>
+                </form>
+
+                <form method="POST" action="{% url 'approve_newsletter' newsletter.id %}" class="d-inline">
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-dark btn-sm">
+                        Approve Newsletter
+                    </button>
+                </form>
+
+            </div>
+
+        </div>
+    </div>
+
+    {% empty %}
+
+    <p class="text-muted">No newsletters awaiting approval.</p>
+
+    {% endfor %}
+
+
+    <hr>
+
+    <!-- APPROVED NEWSLETTERS -->
+
+    <h2 class="mb-3">Approved Newsletters</h2>
+
+    {% for newsletter in approved_newsletters %}
+
+    <div class="card shadow-sm mb-3">
+        <div class="card-body">
+
+            <h3 class="card-title">
+                <a href="{% url 'newsletter_detail' newsletter_id=newsletter.id %}">
+                    {{ newsletter.title }}
+                </a>
+            </h3>
+
+            <p class="text-muted">
+                Author: {{ newsletter.author }}
+            </p>
+
+            <span class="badge bg-success mb-3">
+                Approved
+            </span>
+
+            <div class="mt-2">
+
+                <form method="POST" action="{% url 'editor_delete_newsletter' newsletter.id %}" class="d-inline">
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-outline-danger btn-sm">
+                        Delete
+                    </button>
+                </form>
+
+            </div>
+
+        </div>
+    </div>
+
+    {% empty %}
+
+    <p class="text-muted">No approved newsletters yet.</p>
+
+    {% endfor %}
+
+</div>
+
+{% endblock %}

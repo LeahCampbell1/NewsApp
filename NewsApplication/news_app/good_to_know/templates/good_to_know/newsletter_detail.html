@@ -1,0 +1,108 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ newsletter.title }} | GoodToKnow{% endblock %}
+
+{% block content %}
+
+<div class="container mt-4">
+
+    <div class="newsletter-detail-box">
+
+        <!-- NEWSLETTER TITLE -->
+        <h1 class="mb-3">{{ newsletter.title }}</h1>
+
+        <!-- NEWSLETTER INFORMATION -->
+        <div class="newsletter-meta mb-4">
+
+            <p class="text-muted mb-2">
+                By <strong>{{ newsletter.author }}</strong>
+            </p>
+
+            <p class="text-muted small">
+                Created: {{ newsletter.created_at|date:"d F Y" }}
+            </p>
+
+        </div>
+
+        <hr>
+
+        <!-- NEWSLETTER DESCRIPTION -->
+        <div class="newsletter-description mb-4">
+
+            <h2>About this Newsletter</h2>
+
+            {{ newsletter.description|linebreaks }}
+
+        </div>
+
+        <hr>
+
+        <!-- NEWSLETTER ARTICLES -->
+        <div class="newsletter-articles">
+
+            <h2 class="mb-3">Articles in this Newsletter</h2>
+
+            <div class="row">
+
+                {% for article in articles %}
+
+                <div class="col-12 mb-3">
+
+                    <div class="card shadow-sm">
+
+                        <div class="card-body">
+
+                            <h3 class="card-title">
+                                <a href="{% url 'article_detail' article.id %}" class="text-decoration-none text-dark">
+
+                                    {{ article.title }}
+
+                                </a>
+                            </h3>
+
+                            <p class="text-muted small">
+                                By {{ article.author }}
+                            </p>
+
+                            <p class="card-text">
+                                {{ article.content|truncatewords:35 }}
+                            </p>
+
+                            <a href="{% url 'article_detail' article.id %}" class="btn btn-outline-dark btn-sm">
+
+                                Read Article
+
+                            </a>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                {% empty %}
+
+                <p class="text-muted">
+                    No approved articles are currently available in this newsletter.
+                </p>
+
+                {% endfor %}
+
+            </div>
+
+        </div>
+
+        <hr>
+
+        <!-- BACK BUTTON -->
+        <a href="{% url 'browse_newsletters' %}" class="btn btn-outline-dark">
+
+            Back to Newsletters
+
+        </a>
+
+    </div>
+
+</div>
+
+{% endblock %}

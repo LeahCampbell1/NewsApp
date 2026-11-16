@@ -1,0 +1,68 @@
+{% extends 'base.html' %}
+
+{% block title %}Browse Publishers | GoodToKnow{% endblock %}
+
+{% block content %}
+
+<div class="container mt-4">
+
+    <h1 class="text-center mb-4">Browse Publishers</h1>
+
+    <div class="row">
+
+        {% for publisher in publishers %}
+
+        <div class="col-md-4 mb-4">
+            <div class="card shadow-sm h-100">
+                <div class="card-body">
+
+                    <a href="{% url 'publisher_collection' publisher.id %}" class="text-decoration-none">
+
+                        <h3 class="card-title">
+                            {{ publisher.name }}
+                        </h3>
+
+                    </a>
+                    {% if user.is_authenticated and user.role == 'READER' %}
+                    {% if publisher.id in subscribed_publisher_ids %}
+
+                    <span class="badge bg-success mb-2">
+                        Subscribed
+                    </span>
+
+                    <form method="POST" action="{% url 'unsubscribe_publisher' publisher.id %}">
+                        {% csrf_token %}
+
+                        <button type="submit" class="btn btn-outline-danger btn-sm">
+                            Unsubscribe
+                        </button>
+                    </form>
+
+                    {% else %}
+
+                    <form method="POST" action="{% url 'subscribe_publisher' publisher.id %}">
+                        {% csrf_token %}
+
+                        <button type="submit" class="btn btn-dark btn-sm">
+                            Subscribe
+                        </button>
+                    </form>
+
+                    {% endif %}
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+        {% empty %}
+
+        <div class="col-12 text-center">
+            <p>No publishers available yet.</p>
+        </div>
+
+        {% endfor %}
+
+    </div>
+
+</div>
+
+{% endblock %}

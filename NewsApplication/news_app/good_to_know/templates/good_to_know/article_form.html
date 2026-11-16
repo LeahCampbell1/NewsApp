@@ -1,0 +1,97 @@
+{% extends 'base.html' %}
+
+{% block title %}Create Article | Good to Know{% endblock %}
+
+{% block content %}
+
+<div class="container">
+
+    <h1>
+        {% if form.instance.pk %}
+        Edit Article
+        {% else %}
+        Create New Article
+        {% endif %}
+    </h1>
+
+    <p>Complete the form below to submit your article.</p>
+
+    <form method="POST" enctype="multipart/form-data">
+
+        {% csrf_token %}
+
+        {% if form.non_field_errors %}
+        <div class="error-message">
+            {{ form.non_field_errors }}
+        </div>
+        {% endif %}
+
+        <div class="form-group">
+            <label for="{{ form.title.id_for_label }}">
+                {{ form.title.label }}
+            </label>
+
+            {{ form.title }}
+
+            {% for error in form.title.errors %}
+            <p class="error-message">{{ error }}</p>
+            {% endfor %}
+        </div>
+
+        <div class="form-group">
+            <label for="{{ form.content.id_for_label }}">
+                {{ form.content.label }}
+            </label>
+
+            {{ form.content }}
+
+            {% for error in form.content.errors %}
+            <p class="error-message">{{ error }}</p>
+            {% endfor %}
+        </div>
+
+        <div class="form-group">
+            <label for="{{ form.image.id_for_label }}">
+                {{ form.image.label }}
+            </label>
+
+            {{ form.image }}
+
+            <small>{{ form.image.help_text }}</small>
+
+            {% for error in form.image.errors %}
+            <p class="error-message">{{ error }}</p>
+            {% endfor %}
+        </div>
+
+        <div class="form-group">
+            <label for="{{ form.publisher.id_for_label }}">
+                {{ form.publisher.label }}
+            </label>
+
+            {{ form.publisher }}
+
+            <small>{{ form.publisher.help_text }}</small>
+
+            {% for error in form.publisher.errors %}
+            <p class="error-message">{{ error }}</p>
+            {% endfor %}
+        </div>
+
+        <button type="submit" class="nav-button">
+            {% if form.instance.pk %}
+            Update Article
+            {% else %}
+            Submit Article
+            {% endif %}
+        </button>
+
+        <a href="{% url 'home' %}" class="nav-button">
+            Cancel
+        </a>
+
+    </form>
+
+</div>
+
+{% endblock %}

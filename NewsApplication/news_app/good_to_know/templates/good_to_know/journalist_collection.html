@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ journalist.username }} | Collection{% endblock %}
+
+{% block content %}
+
+<div class="container mt-4">
+
+    <h1>{{ journalist.username }}'s Collection</h1>
+
+    <hr>
+
+    <h2>Articles</h2>
+
+    {% for article in articles %}
+
+    <div class="mb-4">
+        <h3>
+            <a href="{% url 'article_detail' article.id %}">
+                {{ article.title }}
+            </a>
+        </h3>
+
+        <p>{{ article.content|truncatewords:30 }}</p>
+    </div>
+
+    {% empty %}
+
+    <p>No published articles yet.</p>
+
+    {% endfor %}
+
+    <hr>
+
+    <h2>Newsletters</h2>
+
+    {% for newsletter in newsletters %}
+
+    <div class="mb-4">
+
+        <h3>
+            <a href="{% url 'newsletter_detail' newsletter.id %}">
+                {{ newsletter.title }}
+            </a>
+        </h3>
+
+        <p>{{ newsletter.description|truncatewords:30 }}</p>
+
+    </div>
+
+    {% empty %}
+
+    <p>No published newsletters yet.</p>
+
+    {% endfor %}
+
+</div>
+
+{% endblock %}
